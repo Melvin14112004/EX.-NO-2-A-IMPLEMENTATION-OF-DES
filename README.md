@@ -16,9 +16,33 @@
   STEP-5: Thus the encrypted 64-bit cipher text is obtained in this way. Repeat the same process for the remaining plain text characters.
   
 ## PROGRAM:
+```
+from Crypto.Cipher import DES
+import binascii
+
+print("DES: \n")
+key = b'hello123'
+
+def pad(text):
+    while len(text) % 8 != 0:
+        text += b'\x00'
+    return text
+
+des = DES.new(key, DES.MODE_ECB)
+
+text = b'Data Encryption standard'
+print("Original_Text: ",text)
+
+pad_text = pad(text)
+
+encrypted = des.encrypt(pad_text)
+
+print("Encrypted text:", binascii.hexlify(encrypted))
+
+decrypted = des.decrypt(encrypted)
+
+print("Decrypted text:", decrypted.rstrip(b'\x00').decode())
+```
 
 ## OUTPUT:
-
-## RESULT:
-
-  Thus the data encryption standard algorithm had been implemented successfully.
+![image](https://github.com/user-attachments/assets/3d122b5c-7f57-4110-8de5-a8b48762e3a9)
